@@ -1,0 +1,162 @@
+<div class="page-header">
+  <h1>Registrar Nueva Mascota</h1>
+  <a href="/mascotas" class="btn btn-secondary">← Volver</a>
+</div>
+
+<form action="/mascotas" method="POST" enctype="multipart/form-data" class="form-large">
+  <div class="form-section">
+    <h2>Información Básica</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nombre">Nombre *</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+
+      <div class="form-group">
+        <label for="especie">Especie *</label>
+        <select id="especie" name="especie" required>
+          <option value="">Seleccionar...</option>
+          <option value="Perro">Perro</option>
+          <option value="Gato">Gato</option>
+          <option value="Ave">Ave</option>
+          <option value="Roedor">Roedor</option>
+          <option value="Reptil">Reptil</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="raza">Raza *</label>
+        <input type="text" id="raza" name="raza" required>
+      </div>
+
+      <div class="form-group">
+        <label for="edad">Edad (años) *</label>
+        <input type="number" id="edad" name="edad" step="0.1" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="peso">Peso (kg) *</label>
+        <input type="number" id="peso" name="peso" step="0.1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="sexo">Sexo *</label>
+        <select id="sexo" name="sexo" required>
+          <option value="">Seleccionar...</option>
+          <option value="Macho">Macho</option>
+          <option value="Hembra">Hembra</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input type="text" id="color" name="color">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Pedigree</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pedigreeNumero">Número de Registro</label>
+        <input type="text" id="pedigreeNumero" name="pedigreeNumero">
+      </div>
+
+      <div class="form-group">
+        <label for="pedigreeCriador">Criador</label>
+        <input type="text" id="pedigreeCriador" name="pedigreeCriador">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pedigreePadre">Padre</label>
+        <input type="text" id="pedigreePadre" name="pedigreePadre">
+      </div>
+
+      <div class="form-group">
+        <label for="pedigreeMadre">Madre</label>
+        <input type="text" id="pedigreeMadre" name="pedigreeMadre">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Alimentación</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="tipoDieta">Tipo de Dieta</label>
+        <input type="text" id="tipoDieta" name="tipoDieta" placeholder="Ej: Balanceada, BARF, Casera">
+      </div>
+
+      <div class="form-group">
+        <label for="marcaAlimento">Marca de Alimento</label>
+        <input type="text" id="marcaAlimento" name="marcaAlimento">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="cantidadDiaria">Cantidad Diaria</label>
+        <input type="text" id="cantidadDiaria" name="cantidadDiaria" placeholder="Ej: 300g, 2 tazas">
+      </div>
+
+      <div class="form-group">
+        <label for="frecuencia">Frecuencia</label>
+        <input type="text" id="frecuencia" name="frecuencia" placeholder="Ej: 2 veces al día">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="alergias">Alergias Alimentarias (separadas por comas)</label>
+      <input type="text" id="alergias" name="alergias" placeholder="Ej: Pollo, Soja, Trigo">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Propietario</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="propietarioNombre">Nombre *</label>
+        <input type="text" id="propietarioNombre" name="propietarioNombre" required>
+      </div>
+
+      <div class="form-group">
+        <label for="propietarioTelefono">Teléfono *</label>
+        <input type="tel" id="propietarioTelefono" name="propietarioTelefono" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="propietarioEmail">Email</label>
+        <input type="email" id="propietarioEmail" name="propietarioEmail">
+      </div>
+
+      <div class="form-group">
+        <label for="propietarioDireccion">Dirección</label>
+        <input type="text" id="propietarioDireccion" name="propietarioDireccion">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Imágenes</h2>
+    <div class="form-group">
+      <label for="imagenes">Subir Imágenes (máximo 5)</label>
+      <input type="file" id="imagenes" name="imagenes" multiple accept="image/*">
+      <small class="form-text">Formatos permitidos: JPG, PNG, GIF (máximo 5MB por archivo)</small>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Registrar Mascota</button>
+    <a href="/mascotas" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>

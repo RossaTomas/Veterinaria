@@ -1,0 +1,53 @@
+<div class="page-header">
+  <h1>Diagnósticos</h1>
+  <a href="/diagnosticos/nuevo" class="btn btn-primary">➕ Nuevo Diagnóstico</a>
+</div>
+
+{{#if diagnosticos.length}}
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Mascota</th>
+          <th>Diagnóstico Predictivo</th>
+          <th>Probabilidad</th>
+          <th>Nivel</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each diagnosticos}}
+          <tr>
+            <td>
+              <a href="/mascotas/{{this.mascota._id}}">{{this.mascota.nombre}}</a>
+              <br><small>{{this.mascota.especie}} - {{this.mascota.raza}}</small>
+            </td>
+            <td>{{this.diagnosticoPrediccion.enfermedad}}</td>
+            <td>{{this.diagnosticoPrediccion.probabilidad}}%</td>
+            <td>
+              <span class="badge badge-{{this.diagnosticoPrediccion.nivel}}">
+                {{this.diagnosticoPrediccion.nivel}}
+              </span>
+            </td>
+            <td>
+              <span class="badge badge-estado-{{this.estado}}">
+                {{this.estado}}
+              </span>
+            </td>
+            <td>{{this.fechaDiagnostico}}</td>
+            <td>
+              <a href="/diagnosticos/{{this._id}}" class="btn btn-sm btn-info">Ver</a>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+{{else}}
+  <div class="empty-state">
+    <p>No hay diagnósticos registrados aún</p>
+    <a href="/diagnosticos/nuevo" class="btn btn-primary">Realizar Primer Diagnóstico</a>
+  </div>
+{{/if}}

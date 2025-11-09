@@ -1,0 +1,146 @@
+<div class="page-header">
+  <h1>Editar Mascota</h1>
+  <a href="/mascotas/{{mascota._id}}" class="btn btn-secondary">← Volver</a>
+</div>
+
+<form action="/mascotas/{{mascota._id}}/actualizar" method="POST" class="form-large">
+  <div class="form-section">
+    <h2>Información Básica</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nombre">Nombre *</label>
+        <input type="text" id="nombre" name="nombre" value="{{mascota.nombre}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="especie">Especie *</label>
+        <select id="especie" name="especie" required>
+          <option value="Perro" {{#if (eq mascota.especie 'Perro')}}selected{{/if}}>Perro</option>
+          <option value="Gato" {{#if (eq mascota.especie 'Gato')}}selected{{/if}}>Gato</option>
+          <option value="Ave" {{#if (eq mascota.especie 'Ave')}}selected{{/if}}>Ave</option>
+          <option value="Roedor" {{#if (eq mascota.especie 'Roedor')}}selected{{/if}}>Roedor</option>
+          <option value="Reptil" {{#if (eq mascota.especie 'Reptil')}}selected{{/if}}>Reptil</option>
+          <option value="Otro" {{#if (eq mascota.especie 'Otro')}}selected{{/if}}>Otro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="raza">Raza *</label>
+        <input type="text" id="raza" name="raza" value="{{mascota.raza}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="edad">Edad (años) *</label>
+        <input type="number" id="edad" name="edad" value="{{mascota.edad}}" step="0.1" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="peso">Peso (kg) *</label>
+        <input type="number" id="peso" name="peso" value="{{mascota.peso}}" step="0.1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="sexo">Sexo *</label>
+        <select id="sexo" name="sexo" required>
+          <option value="Macho" {{#if (eq mascota.sexo 'Macho')}}selected{{/if}}>Macho</option>
+          <option value="Hembra" {{#if (eq mascota.sexo 'Hembra')}}selected{{/if}}>Hembra</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input type="text" id="color" name="color" value="{{mascota.color}}">
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Pedigree</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pedigreeNumero">Número de Registro</label>
+        <input type="text" id="pedigreeNumero" name="pedigreeNumero" value="{{mascota.pedigree.numeroRegistro}}">
+      </div>
+
+      <div class="form-group">
+        <label for="pedigreeCriador">Criador</label>
+        <input type="text" id="pedigreeCriador" name="pedigreeCriador" value="{{mascota.pedigree.criador}}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="pedigreePadre">Padre</label>
+        <input type="text" id="pedigreePadre" name="pedigreePadre" value="{{mascota.pedigree.padre}}">
+      </div>
+
+      <div class="form-group">
+        <label for="pedigreeMadre">Madre</label>
+        <input type="text" id="pedigreeMadre" name="pedigreeMadre" value="{{mascota.pedigree.madre}}">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Alimentación</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="tipoDieta">Tipo de Dieta</label>
+        <input type="text" id="tipoDieta" name="tipoDieta" value="{{mascota.alimentacion.tipoDieta}}">
+      </div>
+
+      <div class="form-group">
+        <label for="marcaAlimento">Marca de Alimento</label>
+        <input type="text" id="marcaAlimento" name="marcaAlimento" value="{{mascota.alimentacion.marcaAlimento}}">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="cantidadDiaria">Cantidad Diaria</label>
+        <input type="text" id="cantidadDiaria" name="cantidadDiaria" value="{{mascota.alimentacion.cantidadDiaria}}">
+      </div>
+
+      <div class="form-group">
+        <label for="frecuencia">Frecuencia</label>
+        <input type="text" id="frecuencia" name="frecuencia" value="{{mascota.alimentacion.frecuencia}}">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Propietario</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="propietarioNombre">Nombre *</label>
+        <input type="text" id="propietarioNombre" name="propietarioNombre" value="{{mascota.propietario.nombre}}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="propietarioTelefono">Teléfono *</label>
+        <input type="tel" id="propietarioTelefono" name="propietarioTelefono" value="{{mascota.propietario.telefono}}" required>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="propietarioEmail">Email</label>
+        <input type="email" id="propietarioEmail" name="propietarioEmail" value="{{mascota.propietario.email}}">
+      </div>
+
+      <div class="form-group">
+        <label for="propietarioDireccion">Dirección</label>
+        <input type="text" id="propietarioDireccion" name="propietarioDireccion" value="{{mascota.propietario.direccion}}">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a href="/mascotas/{{mascota._id}}" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>

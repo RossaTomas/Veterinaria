@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Veterinaria Online</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-box">
+      <div class="login-header">
+        <h1>🐾 Veterinaria Online</h1>
+        <p>Sistema de Diagnóstico Veterinario</p>
+      </div>
+
+      {{#if error}}
+        <div class="alert alert-error">
+          Usuario o contraseña incorrectos
+        </div>
+      {{/if}}
+
+      <form action="/login" method="POST" class="login-form">
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" name="usuario" required autofocus>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+      </form>
+
+      <div class="login-info">
+        <p><strong>Credenciales de acceso:</strong></p>
+        <p>Usuario: <code>alumno</code></p>
+        <p>Contraseña: <code>alu123</code></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

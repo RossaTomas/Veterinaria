@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{#if title}}{{title}} - {{/if}}Veterinaria Online</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="/dashboard" class="nav-brand">🐾 Veterinaria Online</a>
+      <ul class="nav-menu">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/mascotas">Mascotas</a></li>
+        <li><a href="/diagnosticos">Diagnósticos</a></li>
+        <li><a href="/logout" class="btn-logout">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2024 Sistema de Diagnóstico Veterinario Online</p>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

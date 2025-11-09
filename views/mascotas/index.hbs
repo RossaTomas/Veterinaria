@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1>Mascotas Registradas</h1>
+  <a href="/mascotas/nueva" class="btn btn-primary">➕ Nueva Mascota</a>
+</div>
+
+{{#if mascotas.length}}
+  <div class="cards-grid">
+    {{#each mascotas}}
+      <div class="card">
+        <div class="card-header">
+          <h3>{{this.nombre}}</h3>
+          <span class="badge">{{this.especie}}</span>
+        </div>
+        <div class="card-body">
+          <p><strong>Raza:</strong> {{this.raza}}</p>
+          <p><strong>Edad:</strong> {{this.edad}} años</p>
+          <p><strong>Peso:</strong> {{this.peso}} kg</p>
+          <p><strong>Sexo:</strong> {{this.sexo}}</p>
+          <p><strong>Propietario:</strong> {{this.propietario.nombre}}</p>
+        </div>
+        <div class="card-footer">
+          <a href="/mascotas/{{this._id}}" class="btn btn-sm btn-info">Ver Detalles</a>
+          <a href="/diagnosticos/nuevo?mascota={{this._id}}" class="btn btn-sm btn-success">Diagnosticar</a>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <div class="empty-state">
+    <p>No hay mascotas registradas aún</p>
+    <a href="/mascotas/nueva" class="btn btn-primary">Registrar Primera Mascota</a>
+  </div>
+{{/if}}

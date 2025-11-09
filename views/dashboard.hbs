@@ -1,0 +1,89 @@
+<div class="dashboard">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Bienvenido al Sistema de Diagnóstico Veterinario Online</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">🐕</div>
+      <div class="stat-info">
+        <h3>{{totalMascotas}}</h3>
+        <p>Mascotas Registradas</p>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon">📋</div>
+      <div class="stat-info">
+        <h3>{{totalDiagnosticos}}</h3>
+        <p>Diagnósticos Realizados</p>
+      </div>
+    </div>
+
+    <div class="stat-card warning">
+      <div class="stat-icon">⏳</div>
+      <div class="stat-info">
+        <h3>{{diagnosticosPendientes}}</h3>
+        <p>Diagnósticos Pendientes</p>
+      </div>
+    </div>
+
+    <div class="stat-card critical">
+      <div class="stat-icon">⚠️</div>
+      <div class="stat-info">
+        <h3>{{diagnosticosCriticos}}</h3>
+        <p>Casos Críticos</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dashboard-actions">
+    <a href="/mascotas/nueva" class="btn btn-primary">➕ Nueva Mascota</a>
+    <a href="/diagnosticos/nuevo" class="btn btn-success">🩺 Nuevo Diagnóstico</a>
+  </div>
+
+  <div class="dashboard-grid">
+    <div class="dashboard-section">
+      <h2>Últimas Mascotas Registradas</h2>
+      {{#if ultimasMascotas.length}}
+        <div class="list-group">
+          {{#each ultimasMascotas}}
+            <a href="/mascotas/{{this._id}}" class="list-item">
+              <div>
+                <strong>{{this.nombre}}</strong>
+                <span class="badge">{{this.especie}}</span>
+              </div>
+              <small>{{this.raza}} - {{this.edad}} años</small>
+            </a>
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="empty-state">No hay mascotas registradas aún</p>
+      {{/if}}
+      <a href="/mascotas" class="btn btn-link">Ver todas las mascotas →</a>
+    </div>
+
+    <div class="dashboard-section">
+      <h2>Últimos Diagnósticos</h2>
+      {{#if ultimosDiagnosticos.length}}
+        <div class="list-group">
+          {{#each ultimosDiagnosticos}}
+            <a href="/diagnosticos/{{this._id}}" class="list-item">
+              <div>
+                <strong>{{this.mascota.nombre}}</strong>
+                <span class="badge badge-{{this.diagnosticoPrediccion.nivel}}">
+                  {{this.diagnosticoPrediccion.nivel}}
+                </span>
+              </div>
+              <small>{{this.diagnosticoPrediccion.enfermedad}}</small>
+            </a>
+          {{/each}}
+        </div>
+      {{else}}
+        <p class="empty-state">No hay diagnósticos realizados aún</p>
+      {{/if}}
+      <a href="/diagnosticos" class="btn btn-link">Ver todos los diagnósticos →</a>
+    </div>
+  </div>
+</div>

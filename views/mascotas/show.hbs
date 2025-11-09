@@ -1,0 +1,256 @@
+<div class="page-header">
+  <h1>{{mascota.nombre}}</h1>
+  <div>
+    <a href="/mascotas/{{mascota._id}}/editar" class="btn btn-primary">✏️ Editar</a>
+    <a href="/diagnosticos/nuevo?mascota={{mascota._id}}" class="btn btn-success">🩺 Nuevo Diagnóstico</a>
+    <form action="/mascotas/{{mascota._id}}/eliminar" method="POST" style="display: inline;" onsubmit="return confirm('¿Está seguro de eliminar esta mascota?');">
+      <button type="submit" class="btn btn-danger">🗑️ Eliminar</button>
+    </form>
+  </div>
+</div>
+
+<div class="detail-grid">
+  <div class="detail-section">
+    <h2>Información General</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Especie:</strong>
+        <span class="badge">{{mascota.especie}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Raza:</strong>
+        <span>{{mascota.raza}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Edad:</strong>
+        <span>{{mascota.edad}} años</span>
+      </div>
+      <div class="info-item">
+        <strong>Peso:</strong>
+        <span>{{mascota.peso}} kg</span>
+      </div>
+      <div class="info-item">
+        <strong>Sexo:</strong>
+        <span>{{mascota.sexo}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Color:</strong>
+        <span>{{mascota.color}}</span>
+      </div>
+    </div>
+  </div>
+
+  {{#if mascota.pedigree.numeroRegistro}}
+  <div class="detail-section">
+    <h2>Pedigree</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Número de Registro:</strong>
+        <span>{{mascota.pedigree.numeroRegistro}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Criador:</strong>
+        <span>{{mascota.pedigree.criador}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Padre:</strong>
+        <span>{{mascota.pedigree.padre}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Madre:</strong>
+        <span>{{mascota.pedigree.madre}}</span>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if mascota.alimentacion.tipoDieta}}
+  <div class="detail-section">
+    <h2>Alimentación</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Tipo de Dieta:</strong>
+        <span>{{mascota.alimentacion.tipoDieta}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Marca:</strong>
+        <span>{{mascota.alimentacion.marcaAlimento}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Cantidad Diaria:</strong>
+        <span>{{mascota.alimentacion.cantidadDiaria}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Frecuencia:</strong>
+        <span>{{mascota.alimentacion.frecuencia}}</span>
+      </div>
+      {{#if mascota.alimentacion.alergias.length}}
+      <div class="info-item full-width">
+        <strong>Alergias:</strong>
+        <span>
+          {{#each mascota.alimentacion.alergias}}
+            <span class="badge badge-warning">{{this}}</span>
+          {{/each}}
+        </span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="detail-section">
+    <h2>Propietario</h2>
+    <div class="info-grid">
+      <div class="info-item">
+        <strong>Nombre:</strong>
+        <span>{{mascota.propietario.nombre}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Teléfono:</strong>
+        <span>{{mascota.propietario.telefono}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Email:</strong>
+        <span>{{mascota.propietario.email}}</span>
+      </div>
+      <div class="info-item">
+        <strong>Dirección:</strong>
+        <span>{{mascota.propietario.direccion}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-section">
+  <div class="section-header">
+    <h2>Vacunas</h2>
+    <button onclick="toggleForm('vacunaForm')" class="btn btn-sm btn-primary">➕ Agregar Vacuna</button>
+  </div>
+
+  <div id="vacunaForm" class="form-card" style="display: none;">
+    <form action="/mascotas/{{mascota._id}}/vacunas" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vacunaNombre">Nombre de la Vacuna</label>
+          <input type="text" id="vacunaNombre" name="nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="vacunaFecha">Fecha</label>
+          <input type="date" id="vacunaFecha" name="fecha" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vacunaProxima">Próxima Dosis</label>
+          <input type="date" id="vacunaProxima" name="proximaDosis">
+        </div>
+        <div class="form-group">
+          <label for="vacunaVet">Veterinario</label>
+          <input type="text" id="vacunaVet" name="veterinario">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="vacunaLote">Lote</label>
+        <input type="text" id="vacunaLote" name="lote">
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar Vacuna</button>
+    </form>
+  </div>
+
+  {{#if mascota.vacunas.length}}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Vacuna</th>
+          <th>Fecha</th>
+          <th>Próxima Dosis</th>
+          <th>Veterinario</th>
+          <th>Lote</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each mascota.vacunas}}
+          <tr>
+            <td>{{this.nombre}}</td>
+            <td>{{this.fecha}}</td>
+            <td>{{this.proximaDosis}}</td>
+            <td>{{this.veterinario}}</td>
+            <td>{{this.lote}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <p class="empty-state">No hay vacunas registradas</p>
+  {{/if}}
+</div>
+
+<div class="detail-section">
+  <div class="section-header">
+    <h2>Antecedentes Médicos</h2>
+    <button onclick="toggleForm('antecedenteForm')" class="btn btn-sm btn-primary">➕ Agregar Antecedente</button>
+  </div>
+
+  <div id="antecedenteForm" class="form-card" style="display: none;">
+    <form action="/mascotas/{{mascota._id}}/antecedentes" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="antecedenteFecha">Fecha</label>
+          <input type="date" id="antecedenteFecha" name="fecha" required>
+        </div>
+        <div class="form-group">
+          <label for="antecedenteVet">Veterinario</label>
+          <input type="text" id="antecedenteVet" name="veterinario">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="antecedenteDesc">Descripción</label>
+        <textarea id="antecedenteDesc" name="descripcion" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="antecedenteTrat">Tratamiento</label>
+        <textarea id="antecedenteTrat" name="tratamiento" rows="2"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Guardar Antecedente</button>
+    </form>
+  </div>
+
+  {{#if mascota.antecedentes.length}}
+    <div class="timeline">
+      {{#each mascota.antecedentes}}
+        <div class="timeline-item">
+          <div class="timeline-date">{{this.fecha}}</div>
+          <div class="timeline-content">
+            <p><strong>{{this.descripcion}}</strong></p>
+            {{#if this.tratamiento}}
+              <p><em>Tratamiento:</em> {{this.tratamiento}}</p>
+            {{/if}}
+            {{#if this.veterinario}}
+              <small>Veterinario: {{this.veterinario}}</small>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p class="empty-state">No hay antecedentes médicos registrados</p>
+  {{/if}}
+</div>
+
+{{#if mascota.imagenes.length}}
+<div class="detail-section">
+  <h2>Imágenes</h2>
+  <div class="image-gallery">
+    {{#each mascota.imagenes}}
+      <img src="{{this}}" alt="Imagen de mascota" class="gallery-image">
+    {{/each}}
+  </div>
+</div>
+{{/if}}
+
+<script>
+function toggleForm(formId) {
+  const form = document.getElementById(formId);
+  form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+</script>

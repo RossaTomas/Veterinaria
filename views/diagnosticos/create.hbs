@@ -1,0 +1,130 @@
+<div class="page-header">
+  <h1>Nuevo Diagnóstico</h1>
+  <a href="/diagnosticos" class="btn btn-secondary">← Volver</a>
+</div>
+
+<form action="/diagnosticos" method="POST" class="form-large" id="diagnosticoForm">
+  <div class="form-section">
+    <h2>Seleccionar Mascota</h2>
+    <div class="form-group">
+      <label for="mascota">Mascota *</label>
+      <select id="mascota" name="mascota" required>
+        <option value="">Seleccionar mascota...</option>
+        {{#each mascotas}}
+          <option value="{{this._id}}" {{#if (eq this._id ../mascotaId)}}selected{{/if}}>
+            {{this.nombre}} - {{this.especie}} ({{this.raza}})
+          </option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <div class="section-header">
+      <h2>Dolencias y Síntomas</h2>
+      <button type="button" onclick="agregarDolencia()" class="btn btn-sm btn-primary">➕ Agregar Síntoma</button>
+    </div>
+
+    <div id="dolenciasContainer">
+      <div class="dolencia-item">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Síntoma *</label>
+            <input type="text" name="sintomas" required placeholder="Ej: Fiebre, Vómitos, Tos">
+          </div>
+          <div class="form-group">
+            <label>Intensidad *</label>
+            <select name="intensidades" required>
+              <option value="Leve">Leve</option>
+              <option value="Moderado">Moderado</option>
+              <option value="Grave">Grave</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Duración</label>
+            <input type="text" name="duraciones" placeholder="Ej: 2 días, 1 semana">
+          </div>
+          <div class="form-group">
+            <label>Descripción</label>
+            <input type="text" name="descripciones" placeholder="Detalles adicionales">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Signos Vitales</h2>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="temperatura">Temperatura (°C)</label>
+        <input type="number" id="temperatura" name="temperatura" step="0.1" placeholder="38.5">
+      </div>
+      <div class="form-group">
+        <label for="frecuenciaCardiaca">Frecuencia Cardíaca (lpm)</label>
+        <input type="number" id="frecuenciaCardiaca" name="frecuenciaCardiaca" placeholder="80">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="frecuenciaRespiratoria">Frecuencia Respiratoria (rpm)</label>
+        <input type="number" id="frecuenciaRespiratoria" name="frecuenciaRespiratoria" placeholder="20">
+      </div>
+      <div class="form-group">
+        <label for="presionArterial">Presión Arterial</label>
+        <input type="text" id="presionArterial" name="presionArterial" placeholder="120/80">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Observaciones</h2>
+    <div class="form-group">
+      <label for="observaciones">Observaciones Adicionales</label>
+      <textarea id="observaciones" name="observaciones" rows="4" placeholder="Cualquier información adicional relevante..."></textarea>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-success">🩺 Generar Diagnóstico Predictivo</button>
+    <a href="/diagnosticos" class="btn btn-secondary">Cancelar</a>
+  </div>
+</form>
+
+<script>
+function agregarDolencia() {
+  const container = document.getElementById('dolenciasContainer');
+  const dolenciaHTML = `
+    <div class="dolencia-item">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Síntoma *</label>
+          <input type="text" name="sintomas" required placeholder="Ej: Fiebre, Vómitos, Tos">
+        </div>
+        <div class="form-group">
+          <label>Intensidad *</label>
+          <select name="intensidades" required>
+            <option value="Leve">Leve</option>
+            <option value="Moderado">Moderado</option>
+            <option value="Grave">Grave</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Duración</label>
+          <input type="text" name="duraciones" placeholder="Ej: 2 días, 1 semana">
+        </div>
+        <div class="form-group">
+          <label>Descripción</label>
+          <input type="text" name="descripciones" placeholder="Detalles adicionales">
+        </div>
+      </div>
+      <button type="button" onclick="this.parentElement.remove()" class="btn btn-sm btn-danger">Eliminar</button>
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', dolenciaHTML);
+}
+</script>
