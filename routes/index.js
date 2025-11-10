@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const { isAuthenticated } = require('../middleware/auth');
-const Mascota = require('../models/Mascota');
-const Diagnostico = require('../models/Diagnostico');
+import { isAuthenticated } from '../middleware/auth.js';
+import Mascota from '../models/Mascota.js';
+import Diagnostico from '../models/Diagnostico.js';
 
 // Dashboard principal
 router.get('/dashboard', isAuthenticated, async (req, res) => {
@@ -43,4 +43,4 @@ router.get('/', (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

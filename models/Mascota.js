@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const mascotaSchema = new mongoose.Schema({
   nombre: {
@@ -82,4 +82,4 @@ const mascotaSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Mascota', mascotaSchema);
+export default mongoose.model('Mascota', mascotaSchema);

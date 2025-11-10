@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const diagnosticoController = require('../controllers/diagnosticoController');
-const upload = require('../config/multer');
-const { isAuthenticated } = require('../middleware/auth');
+import * as diagnosticoController from '../controllers/diagnosticoController.js';
+import upload from '../config/multer.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 // Aplicar autenticación a todas las rutas
 router.use(isAuthenticated);
@@ -20,4 +20,4 @@ router.post('/:id/evaluaciones', upload.single('archivo'), diagnosticoController
 // Actualizar estado
 router.post('/:id/estado', diagnosticoController.updateEstado);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const baseConocimientoSchema = new mongoose.Schema({
   sintoma: {
@@ -31,4 +31,4 @@ const baseConocimientoSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('BaseConocimiento', baseConocimientoSchema);
+export default mongoose.model('BaseConocimiento', baseConocimientoSchema);

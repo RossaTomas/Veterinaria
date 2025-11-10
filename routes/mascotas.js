@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const mascotaController = require('../controllers/mascotaController');
-const upload = require('../config/multer');
-const { isAuthenticated } = require('../middleware/auth');
+import * as mascotaController from '../controllers/mascotaController.js';
+import upload from '../config/multer.js';
+import { isAuthenticated } from '../middleware/auth.js';
 
 // Aplicar autenticación a todas las rutas
 router.use(isAuthenticated);
@@ -20,4 +20,4 @@ router.post('/:id/eliminar', mascotaController.deleteMascota);
 router.post('/:id/vacunas', mascotaController.addVacuna);
 router.post('/:id/antecedentes', mascotaController.addAntecedente);
 
-module.exports = router;
+export default router;

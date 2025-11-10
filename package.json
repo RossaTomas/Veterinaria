@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Sistema de diagnóstico veterinario online con Express y MongoDB",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
