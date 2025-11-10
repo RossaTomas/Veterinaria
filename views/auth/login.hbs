@@ -16,7 +16,13 @@
 
       {{#if error}}
         <div class="alert alert-error">
-          Usuario o contraseña incorrectos
+          {{error}}
+        </div>
+      {{/if}}
+      
+      {{#if success}}
+        <div class="alert alert-success">
+          {{success}}
         </div>
       {{/if}}
 
@@ -33,12 +39,6 @@
 
         <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
       </form>
-
-      <div class="login-info">
-        <p><strong>Credenciales de acceso:</strong></p>
-        <p>Usuario: <code>alumno</code></p>
-        <p>Contraseña: <code>alu123</code></p>
-      </div>
     </div>
   </div>
 </body>
