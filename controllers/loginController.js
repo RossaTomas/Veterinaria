@@ -1,13 +1,13 @@
-const Usuario = require('../models/Usuario');
+import Usuario from '../models/Usuario.js';
 
 // Renderizar formulario de login
-exports.mostrarLogin = (req, res) => {
+export const mostrarLogin = (req, res) => {
   const error = req.query.error;
   res.render('auth/login', { error, layout: false });
 };
 
 // Procesar login
-exports.procesarLogin = async (req, res) => {
+export const procesarLogin = async (req, res) => {
   try {
     const { usuario, password } = req.body;
     
@@ -49,7 +49,7 @@ exports.procesarLogin = async (req, res) => {
 };
 
 // Logout
-exports.logout = (req, res) => {
+export const logout = (req, res) => {
   const usuario = req.session.user?.usuario || 'Desconocido';
   console.log('👋 Logout:', usuario);
   req.session.destroy();

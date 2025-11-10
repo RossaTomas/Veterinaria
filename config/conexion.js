@@ -1,5 +1,6 @@
-const mongoose = require('mongoose'); // traemos mongoose que instalamos
-require('dotenv').config();
+import mongoose from 'mongoose'; // traemos mongoose que instalamos
+import dotenv from 'dotenv';
+dotenv.config();
 
 const url = process.env.MONGODB_URI; // url desde archivo .env
 const nombreBase = "veterinaria"; // nombre de base
@@ -11,18 +12,12 @@ async function conectar() { // funcion
         console.log("✅ Conexion correcta a MongoDB"); // aviso si esta todo ok
         console.log(`📊 Base de datos: ${nombreBase}`);
         
-        return mongoose.connection; // sacamos variable - retornamos la conexion
+        return mongoose.connection;
 
     } catch (error) {
-        console.log("❌ Error de conexion:", error.message); // si hay error de conexion tira numero y asi buscamos que error es
-        console.log("");
-        console.log("💡 Verifica:");
-        console.log("  1. Que tu archivo .env tenga MONGODB_URI configurado");
-        console.log("  2. Que el connection string sea válido");
-        console.log("  3. Que tengas acceso a internet (si usas MongoDB Atlas)");
-        console.log("");
+        console.log("Error de conexion:", error.message); 
         throw error; 
     }
 }
 
-module.exports = conectar;
+export default conectar;

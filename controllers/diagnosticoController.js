@@ -1,6 +1,6 @@
-const Diagnostico = require('../models/Diagnostico');
-const Mascota = require('../models/Mascota');
-const BaseConocimiento = require('../models/BaseConocimiento');
+import Diagnostico from '../models/Diagnostico.js';
+import Mascota from '../models/Mascota.js';
+import BaseConocimiento from '../models/BaseConocimiento.js';
 
 // Sistema de predicción de diagnósticos basado en síntomas
 const predecirDiagnostico = async (dolencias) => {
@@ -107,7 +107,7 @@ const generarTratamiento = (enfermedad) => {
 };
 
 // Obtener todos los diagnósticos
-exports.getAllDiagnosticos = async (req, res) => {
+export const getAllDiagnosticos = async (req, res) => {
   try {
     const diagnosticos = await Diagnostico.find()
       .populate('mascota')
@@ -120,7 +120,7 @@ exports.getAllDiagnosticos = async (req, res) => {
 };
 
 // Mostrar formulario de nuevo diagnóstico
-exports.showCreateForm = async (req, res) => {
+export const showCreateForm = async (req, res) => {
   try {
     const mascotas = await Mascota.find();
     const mascotaId = req.query.mascota;
@@ -132,7 +132,7 @@ exports.showCreateForm = async (req, res) => {
 };
 
 // Crear nuevo diagnóstico
-exports.createDiagnostico = async (req, res) => {
+export const createDiagnostico = async (req, res) => {
   try {
     // Procesar dolencias del formulario
     const dolencias = [];
@@ -179,7 +179,7 @@ exports.createDiagnostico = async (req, res) => {
 };
 
 // Mostrar detalle de diagnóstico
-exports.showDiagnostico = async (req, res) => {
+export const showDiagnostico = async (req, res) => {
   try {
     const diagnostico = await Diagnostico.findById(req.params.id).populate('mascota');
     if (!diagnostico) {
@@ -193,7 +193,7 @@ exports.showDiagnostico = async (req, res) => {
 };
 
 // Agregar evaluación (radiografía, análisis, etc.)
-exports.addEvaluacion = async (req, res) => {
+export const addEvaluacion = async (req, res) => {
   try {
     const diagnostico = await Diagnostico.findById(req.params.id);
     if (!diagnostico) {
@@ -219,7 +219,7 @@ exports.addEvaluacion = async (req, res) => {
 };
 
 // Actualizar estado del diagnóstico
-exports.updateEstado = async (req, res) => {
+export const updateEstado = async (req, res) => {
   try {
     await Diagnostico.findByIdAndUpdate(req.params.id, {
       estado: req.body.estado
@@ -232,7 +232,7 @@ exports.updateEstado = async (req, res) => {
 };
 
 // Eliminar diagnóstico
-exports.deleteDiagnostico = async (req, res) => {
+export const deleteDiagnostico = async (req, res) => {
   try {
     await Diagnostico.findByIdAndDelete(req.params.id);
     res.redirect('/diagnosticos');

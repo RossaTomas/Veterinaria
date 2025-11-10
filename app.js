@@ -1,16 +1,21 @@
-require('dotenv').config();
-const express = require('express');
-const { engine } = require('express-handlebars');
-const session = require('express-session');
-const methodOverride = require('method-override');
-const path = require('path');
-const conectar = require('./config/conexion'); // Conexión a MongoDB
+import 'dotenv/config';
+import express from 'express';
+import { engine } from 'express-handlebars';
+import session from 'express-session';
+import methodOverride from 'method-override';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import conectar from './config/conexion.js';
+
+// Obtener __dirname en ES6 Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Importar rutas
-const indexRoutes = require('./routes/index');
-const authRoutes = require('./routes/auth');
-const mascotasRoutes = require('./routes/mascotas');
-const diagnosticosRoutes = require('./routes/diagnosticos');
+import indexRoutes from './routes/index.js';
+import authRoutes from './routes/auth.js';
+import mascotasRoutes from './routes/mascotas.js';
+import diagnosticosRoutes from './routes/diagnosticos.js';
 
 // Inicializar Express
 const app = express();

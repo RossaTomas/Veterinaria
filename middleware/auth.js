@@ -1,11 +1,7 @@
 // Middleware de autenticación
-const isAuthenticated = (req, res, next) => {
+export const isAuthenticated = (req, res, next) => {
   if (req.session && req.session.user) {
     return next();
   }
   res.redirect('/login');
-};
-
-module.exports = {
-  isAuthenticated
 };

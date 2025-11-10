@@ -1,7 +1,7 @@
-const Mascota = require('../models/Mascota');
+import Mascota from '../models/Mascota.js';
 
 // Obtener todas las mascotas
-exports.getAllMascotas = async (req, res) => {
+export const getAllMascotas = async (req, res) => {
   try {
     console.log('📋 Obteniendo todas las mascotas...');
     const mascotas = await Mascota.find().sort({ fechaRegistro: -1 });
@@ -14,12 +14,12 @@ exports.getAllMascotas = async (req, res) => {
 };
 
 // Mostrar formulario de nueva mascota
-exports.showCreateForm = (req, res) => {
+export const showCreateForm = (req, res) => {
   res.render('mascotas/create');
 };
 
 // Crear nueva mascota
-exports.createMascota = async (req, res) => {
+export const createMascota = async (req, res) => {
   try {
     const mascotaData = {
       nombre: req.body.nombre,
@@ -60,7 +60,7 @@ exports.createMascota = async (req, res) => {
 };
 
 // Mostrar detalle de mascota
-exports.showMascota = async (req, res) => {
+export const showMascota = async (req, res) => {
   try {
     console.log('Buscando mascota con ID:', req.params.id);
     const mascota = await Mascota.findById(req.params.id);
@@ -77,7 +77,7 @@ exports.showMascota = async (req, res) => {
 };
 
 // Mostrar formulario de edición
-exports.showEditForm = async (req, res) => {
+export const showEditForm = async (req, res) => {
   try {
     const mascota = await Mascota.findById(req.params.id);
     if (!mascota) {
@@ -91,7 +91,7 @@ exports.showEditForm = async (req, res) => {
 };
 
 // Actualizar mascota
-exports.updateMascota = async (req, res) => {
+export const updateMascota = async (req, res) => {
   try {
     const mascotaData = {
       nombre: req.body.nombre,
@@ -124,7 +124,7 @@ exports.updateMascota = async (req, res) => {
 };
 
 // Eliminar mascota
-exports.deleteMascota = async (req, res) => {
+export const deleteMascota = async (req, res) => {
   try {
     await Mascota.findByIdAndDelete(req.params.id);
     res.redirect('/mascotas');
@@ -135,7 +135,7 @@ exports.deleteMascota = async (req, res) => {
 };
 
 // Agregar vacuna
-exports.addVacuna = async (req, res) => {
+export const addVacuna = async (req, res) => {
   try {
     const mascota = await Mascota.findById(req.params.id);
     if (!mascota) {
@@ -159,7 +159,7 @@ exports.addVacuna = async (req, res) => {
 };
 
 // Agregar antecedente médico
-exports.addAntecedente = async (req, res) => {
+export const addAntecedente = async (req, res) => {
   try {
     const mascota = await Mascota.findById(req.params.id);
     if (!mascota) {

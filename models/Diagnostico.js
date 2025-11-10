@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const diagnosticoSchema = new mongoose.Schema({
   mascota: {
@@ -67,4 +67,4 @@ const diagnosticoSchema = new mongoose.Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('Diagnostico', diagnosticoSchema);
+export default mongoose.model('Diagnostico', diagnosticoSchema);
