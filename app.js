@@ -4,7 +4,7 @@ const { engine } = require('express-handlebars');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const path = require('path');
-const connectDB = require('./config/database');
+const conectar = require('./config/conexion'); // Conexión a MongoDB
 
 // Importar rutas
 const indexRoutes = require('./routes/index');
@@ -16,7 +16,7 @@ const diagnosticosRoutes = require('./routes/diagnosticos');
 const app = express();
 
 // Conectar a MongoDB
-connectDB();
+conectar();
 
 // Configurar Handlebars
 app.engine('hbs', engine({

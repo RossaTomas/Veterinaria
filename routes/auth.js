@@ -1,22 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { validateLogin } = require('../middleware/auth');
+const loginController = require('../controllers/loginController');
 
-// Ruta de login GET
-router.get('/login', (req, res) => {
-  const error = req.query.error;
-  res.render('auth/login', { error, layout: false });
-});
-
-// Ruta de login POST
-router.post('/login', validateLogin, (req, res) => {
-  res.redirect('/dashboard');
-});
+// Rutas de login
+router.get('/login', loginController.mostrarLogin);
+router.post('/login', loginController.procesarLogin);
 
 // Ruta de logout
-router.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/login');
-});
+router.get('/logout', loginController.logout);
 
 module.exports = router;

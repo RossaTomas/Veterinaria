@@ -1,23 +1,11 @@
 const Diagnostico = require('../models/Diagnostico');
 const Mascota = require('../models/Mascota');
+const BaseConocimiento = require('../models/BaseConocimiento');
 
 // Sistema de predicción de diagnósticos basado en síntomas
-const predecirDiagnostico = (dolencias) => {
-  // Base de conocimiento simplificada para predicción
-  const baseConocimiento = {
-    'fiebre alta': { enfermedad: 'Infección viral o bacteriana', probabilidad: 75, nivel: 'Alto' },
-    'vómitos': { enfermedad: 'Gastroenteritis', probabilidad: 70, nivel: 'Medio' },
-    'diarrea': { enfermedad: 'Trastorno digestivo', probabilidad: 65, nivel: 'Medio' },
-    'tos': { enfermedad: 'Infección respiratoria', probabilidad: 60, nivel: 'Medio' },
-    'cojera': { enfermedad: 'Lesión musculoesquelética', probabilidad: 80, nivel: 'Alto' },
-    'pérdida de apetito': { enfermedad: 'Estrés o enfermedad subyacente', probabilidad: 50, nivel: 'Bajo' },
-    'letargo': { enfermedad: 'Anemia o infección', probabilidad: 60, nivel: 'Medio' },
-    'picazón': { enfermedad: 'Alergia o parásitos', probabilidad: 70, nivel: 'Medio' },
-    'dificultad respiratoria': { enfermedad: 'Problema cardíaco o pulmonar', probabilidad: 85, nivel: 'Crítico' },
-    'convulsiones': { enfermedad: 'Epilepsia o intoxicación', probabilidad: 90, nivel: 'Crítico' },
-    'sangrado': { enfermedad: 'Trauma o trastorno de coagulación', probabilidad: 85, nivel: 'Crítico' },
-    'hinchazón abdominal': { enfermedad: 'Torsión gástrica', probabilidad: 80, nivel: 'Alto' }
-  };
+const predecirDiagnostico = async (dolencias) => {
+  // Obtener base de conocimiento desde la base de datos
+  const baseConocimiento = await BaseConocimiento.find({ activo: true });
   
   let diagnosticoPrincipal = null;
   let maxProbabilidad = 0;
@@ -26,10 +14,10 @@ const predecirDiagnostico = (dolencias) => {
   dolencias.forEach(dolencia => {
     const sintomaLower = dolencia.sintoma.toLowerCase();
     
-    // Buscar coincidencias en la base de conocimiento
-    for (const [key, value] of Object.entries(baseConocimiento)) {
-      if (sintomaLower.includes(key)) {
-        let probabilidad = value.probabilidad;
+    // Buscar coincidencias en la base de conocimiento desde la BD
+    baseConocimiento.forEach(conocimiento => {
+      if (sintomaLower.includes(conocimiento.sintoma)) {
+        let probabilidad = conocimiento.probabilidad;
         
         // Ajustar probabilidad según intensidad
         if (dolencia.intensidad === 'Grave') {
@@ -41,13 +29,13 @@ const predecirDiagnostico = (dolencias) => {
         if (probabilidad > maxProbabilidad) {
           maxProbabilidad = probabilidad;
           diagnosticoPrincipal = {
-            enfermedad: value.enfermedad,
+            enfermedad: conocimiento.enfermedad,
             probabilidad: Math.min(probabilidad, 95),
-            nivel: value.nivel
+            nivel: conocimiento.nivel
           };
         }
       }
-    }
+    });
   });
   
   // Si no se encuentra coincidencia, dar diagnóstico genérico
@@ -167,7 +155,7 @@ exports.createDiagnostico = async (req, res) => {
     }
     
     // Realizar predicción de diagnóstico
-    const prediccion = predecirDiagnostico(dolencias);
+    const prediccion = await predecirDiagnostico(dolencias);
     
     const diagnosticoData = {
       mascota: req.body.mascota,
